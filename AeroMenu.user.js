@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Aero Menu
 // @namespace    http://tampermonkey.net/
-// @version      7.1
+// @version      7.2
+// @updateURL    https://raw.githubusercontent.com/gitty-rubber/Aero-Kirka.io-Menu/main/AeroMenu.user.js
+// @downloadURL  https://raw.githubusercontent.com/gitty-rubber/Aero-Kirka.io-Menu/main/AeroMenu.user.js
 // @description  Fully customizable menu - colors, opacity, size + Chams/No Recoil/Bhop
 // @author       muci00
 // @match        https://kirka.io/*
