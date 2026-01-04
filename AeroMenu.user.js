@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Aero Menu
 // @namespace    http://tampermonkey.net/
-// @version      7.2
+// @version      7.3
 // @updateURL    https://raw.githubusercontent.com/gitty-rubber/Aero-Kirka.io-Menu/main/AeroMenu.user.js
 // @downloadURL  https://raw.githubusercontent.com/gitty-rubber/Aero-Kirka.io-Menu/main/AeroMenu.user.js
 // @description  Fully customizable menu - colors, opacity, size + Chams/No Recoil/Bhop
@@ -13,7 +13,7 @@
 // ==/UserScript==
 (function() {
     'use strict';
-    // License bypass
+    // license bypass
     if (crypto && crypto.subtle && crypto.subtle.verify) crypto.subtle.verify = () => Promise.resolve(true);
     if (localStorage) localStorage.dogewareLicenseKey = btoa(`{"message":"${Date.now() * 2}"}`);
     let menuVisible = false;
@@ -38,6 +38,10 @@
         opacity: 0.95,
         width: 300,
         fontSize: 16
+
+
+
+
     };
     document.addEventListener('mousedown', (e) => { if (e.button === 0) isShooting = true; });
     document.addEventListener('mouseup', (e) => { if (e.button === 0) isShooting = false; });
@@ -54,6 +58,9 @@
             console.log('Camera hooked');
         }
         return origSet.call(this, key, value);
+
+
+
     };
     const patchMaterial = (material) => {
         if (!material || !material.map || !material.map.image || material.map.image.width !== 64 || material.map.image.height !== 64) return;
@@ -75,6 +82,11 @@
             modifiedMaterials.delete(material);
         }
     };
+
+
+
+
+
     const proxyHandler = { apply(target, thisArg, args) { patchMaterial(args[0]); return Reflect.apply(target, thisArg, args); } };
     Array.isArray = new Proxy(Array.isArray, proxyHandler);
     function updateLocalTeam() {
@@ -90,6 +102,11 @@
         });
         if (minDist < 5) localTeam = closestTeam;
     }
+
+
+
+
+
     const origRAF = window.requestAnimationFrame;
     window.requestAnimationFrame = function(cb) {
         return origRAF.call(this, (time) => {
@@ -131,6 +148,11 @@
             cb(time);
         });
     };
+
+
+
+
+
     setInterval(updateLocalTeam, 2000);
     setTimeout(updateLocalTeam, 3000);
     window.addEventListener('DOMContentLoaded', () => {
@@ -168,6 +190,11 @@
             <button id="closeBtn" style="width: 100%; background: ${settings.buttonBg}; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; margin-top: 20px;">Close</button>
             <div style="font-size: 12px; margin-top: 10px; color: #a0a0a0; text-align: center;">P to toggle | Drag header to move</div>
         `;
+
+
+
+
+
         document.body.appendChild(menu);
         let dragging = false, ox, oy;
         const header = document.getElementById('menuHeader');
@@ -184,6 +211,9 @@
                 menu.style.top = (e.clientY - oy) + 'px';
             }
         });
+
+
+
         document.addEventListener('mouseup', () => dragging = false);
         document.getElementById('chamsCB').addEventListener('change', (e) => { chamsEnabled = e.target.checked; if (chamsEnabled) updateLocalTeam(); });
         document.getElementById('recoilCB').addEventListener('change', (e) => noRecoilEnabled = e.target.checked);
@@ -217,6 +247,8 @@
                 }, 5);
             }
         }, 35);
+
+
         document.addEventListener('keydown', (e) => {
             if (e.key.toLowerCase() === 'p') {
                 e.preventDefault();
@@ -226,5 +258,5 @@
             }
         }, true);
     });
-    console.log('Aero v7.1 loaded - fully customizable menu. Press P, tweak colors/opacity/size live. Dominate.');
+    console.log('Aero loaded - press p now bluh.');
 })();
